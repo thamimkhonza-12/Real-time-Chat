@@ -1,8 +1,14 @@
 const roomName = "general";
-const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${roomName}/`);
+const socket = new WebSocket(
+  "wss://your-backend-url.onrender.com/ws/chat/general/"
+);
+
+const ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
+const socket = new WebSocket(`${ws_scheme}://...`);
 
 const chatBox = document.getElementById("chat-box");
 const input = document.getElementById("message-input");
+
 
 socket.onopen = () => {
     console.log("CONNECTED ✔");
