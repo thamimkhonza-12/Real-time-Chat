@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7v_ip0jct4s=2cc#428ix)07*lu=h+7b&k)(kjz8-!3%7wu#$s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = ["*"]
 DEBUG = False
@@ -32,7 +32,7 @@ DEBUG = False
 
 INSTALLED_APPS = [
      
-      'daphne',
+    
      
 
     'django.contrib.admin',
@@ -79,12 +79,15 @@ TEMPLATES = [
 
 ASGI_APPLICATION = "config.asgi.application"
 
+
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis://127.0.0.1:6379", 6379)],
+        },
     },
 }
-
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -139,4 +142,3 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ASGI_APPLICATION = "config.asgi.application"
